@@ -1,5 +1,5 @@
 // import { FaUserCircle } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import userIcon from"../assets/user.png"
 const Navbar = () => {
   return (
@@ -14,10 +14,11 @@ const Navbar = () => {
       </div>
 
       <div className=" flex items-center justify-end gap-3 ">
-        <img src={userIcon} alt="" />
+       <Link to="/auth/register"> <img src={userIcon} alt="" /></Link>
+
         {/* <FaUserCircle size={40}/> */}
 
-        <button className="btn text-white bg-black px-7 py-2">Login</button>
+        <Link to="/auth/login" className="btn text-white bg-black px-7 py-2">Login</Link >
 
       </div>
     </div>

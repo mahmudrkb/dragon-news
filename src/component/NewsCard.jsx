@@ -1,8 +1,10 @@
 
 
+
 const NewsCard = ({ singleNews}) => {
 
   const {
+   
     author: { img: authorImg, name: authorName },
     published_date: publishedDate,
     title,
