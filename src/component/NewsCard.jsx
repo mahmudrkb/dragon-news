@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 
@@ -12,6 +13,7 @@ const NewsCard = ({ singleNews}) => {
     details,
     rating: { number: ratingNumber, badge },
     total_view: totalView,
+    _id,
   } = singleNews;
 
   return (
@@ -36,7 +38,11 @@ const NewsCard = ({ singleNews}) => {
         className="w-full h-48 object-cover rounded-lg mb-4"
       />
 
-      <p className="text-gray-700 text-sm mb-4">{details.slice(0, 150)}...</p>
+      <p className="text-gray-700 text-sm mb-4">{details.slice(0, 150)}...
+ 
+      </p>
+      <Link to={`/news/${_id}`} className="text-red-500" >Read More...</Link>
+     
 
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
