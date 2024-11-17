@@ -1,32 +1,30 @@
-import React, { useContext } from "react";
-import { Form, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import  { AuthContext } from "../provider/AuthProvider";
+import React, { useContext, useState } from "react";
+import { Form, Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
-  const { userLogin,setUser } = useContext(AuthContext);
-  const location=useLocation();
-  const navigate=useNavigate();
-  console.log(location)
+  const { userLogin, setUser } = useContext(AuthContext);
+  const [error, setError] = useState({});
+  const location = useLocation();
+  const navigate = useNavigate();
+  // console.log(location);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const email = form.get("email");
     const password = form.get("password");
-    console.log(email, password);
+    // console.log(email, password);
     userLogin(email, password)
-    .then(result=>{
-        const user=result.user;
-        setUser(user)
-        navigate(location?.state ? location.state:'/' )
-       
-    })  .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode,errorMessage)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        setError({ ...error, login: err.code });
       });
   };
-  
 
   return (
     <div className="hero bg-base-200 min-h-screen ">
@@ -58,6 +56,11 @@ const Login = () => {
               className="input input-bordered"
               required
             />
+            {error.login && <label className="label text-red-500">
+              {error.login} <br />
+              Wrong password
+             
+              </label>}
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
                 Forgot password?
